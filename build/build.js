@@ -97,6 +97,9 @@ function buildFirefox() {
     gecko: {
       id: 'gmail-to-asana@extension',
       strict_min_version: '109.0',
+      data_collection_permissions: {
+        required: false,
+      },
     },
   };
 
