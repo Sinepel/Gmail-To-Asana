@@ -1,0 +1,1048 @@
+/**
+ * Styles for Gmail to Asana Extension
+ */
+
+/* ==================== Asana Button ==================== */
+
+.asana-gmail-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px !important;
+  height: 32px;
+  margin-right: 8px;
+  background: transparent !important;
+  color: #5f6368 !important;
+  border: 1px solid #dadce0 !important;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-family: 'Google Sans', Roboto, sans-serif;
+}
+
+.asana-gmail-btn:hover {
+  background: #f6f8fc !important;
+  border-color: #dadce0 !important;
+  color: #202124 !important;
+  box-shadow: 0 1px 3px rgba(60,64,67,0.15);
+}
+
+.asana-gmail-btn:active {
+  background: #e8eaed !important;
+  box-shadow: none;
+}
+
+.asana-gmail-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #f06a6a 0%, #e8384f 100%);
+  border-radius: 4px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Asana three-dot logo using pseudo-elements and box-shadow */
+.asana-gmail-btn-icon::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 5px 7px 0 0 white;
+}
+
+.asana-gmail-btn-icon::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  bottom: 3px;
+  left: 4px;
+}
+
+.asana-gmail-btn-text {
+  letter-spacing: 0.1px;
+}
+
+/* ==================== Mini Asana Button (per message) ==================== */
+
+.asana-gmail-btn-mini {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  margin-left: 8px;
+  margin-right: 4px;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.asana-gmail-btn-mini:hover {
+  background: #fce8e8 !important;
+  border-color: #f06a6a !important;
+  transform: scale(1.1);
+}
+
+.asana-gmail-btn-mini:active {
+  background: #f9d4d4 !important;
+  transform: scale(1);
+}
+
+.asana-mini-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #f06a6a;
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1;
+}
+
+/* ==================== Notifications ==================== */
+
+.asana-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 999999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.asana-notification-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.asana-notification-info {
+  background: #4573d2;
+  color: white;
+}
+
+.asana-notification-error {
+  background: #e8384f;
+  color: white;
+}
+
+.asana-notification-success {
+  background: #5da283;
+  color: white;
+}
+
+/* ==================== Modal ==================== */
+
+.asana-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.asana-modal-overlay.asana-modal-visible {
+  opacity: 1;
+}
+
+.asana-modal {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.asana-modal-visible .asana-modal {
+  transform: scale(1);
+}
+
+.asana-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8ecee;
+}
+
+.asana-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e1f21;
+}
+
+.asana-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6d6e6f;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+.asana-modal-close:hover {
+  background: #f1f2f3;
+  color: #1e1f21;
+}
+
+.asana-modal-body {
+  padding: 20px;
+}
+
+.asana-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #e8ecee;
+}
+
+/* ==================== Form Elements ==================== */
+
+.asana-form-group {
+  margin-bottom: 16px;
+}
+
+.asana-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6d6e6f;
+}
+
+.asana-input,
+.asana-select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  background: white;
+  color: #1e1f21;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.asana-input:focus,
+.asana-select:focus {
+  outline: none;
+  border-color: #f06a6a;
+  box-shadow: 0 0 0 3px rgba(240, 106, 106, 0.15);
+}
+
+.asana-input:disabled,
+.asana-select:disabled {
+  background: #f6f8f9;
+  color: #9ca6af;
+  cursor: not-allowed;
+}
+
+/* ==================== Checkboxes ==================== */
+
+.asana-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1e1f21;
+  padding: 6px 0;
+}
+
+.asana-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #f06a6a;
+  cursor: pointer;
+}
+
+.asana-attachments-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 8px;
+  background: #f6f8f9;
+  border-radius: 6px;
+}
+
+.asana-attachments-list .asana-checkbox-label {
+  padding: 4px 0;
+}
+
+.asana-attachments-list .asana-checkbox-label span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==================== Buttons ==================== */
+
+.asana-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.asana-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.asana-btn-primary {
+  background: #f06a6a;
+  color: white;
+}
+
+.asana-btn-primary:hover:not(:disabled) {
+  background: #e55555;
+}
+
+.asana-btn-secondary {
+  background: #f1f2f3;
+  color: #1e1f21;
+}
+
+.asana-btn-secondary:hover:not(:disabled) {
+  background: #e5e7e9;
+}
+
+/* ==================== Status Messages ==================== */
+
+.asana-status {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.asana-status:empty {
+  display: none;
+}
+
+.asana-status-info {
+  background: #e8f4fd;
+  color: #2563eb;
+}
+
+.asana-status-error {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.asana-status-success {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.asana-status a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ==================== Email Preview Section ==================== */
+
+.asana-preview-section {
+  background: #f6f8f9;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.asana-preview-header {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6d6e6f;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.asana-icon {
+  font-size: 14px;
+}
+
+.asana-preview-sender,
+.asana-preview-subject {
+  font-size: 13px;
+  color: #1e1f21;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.asana-preview-label {
+  font-weight: 500;
+  color: #6d6e6f;
+  margin-right: 6px;
+}
+
+.asana-preview-subject span:last-child {
+  font-weight: 500;
+}
+
+.asana-preview-body-container {
+  margin-top: 12px;
+  border-top: 1px solid #e8ecee;
+  padding-top: 10px;
+}
+
+.asana-preview-body-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.asana-preview-body-header:hover {
+  color: #f06a6a;
+}
+
+.asana-toggle-icon {
+  font-size: 10px;
+  color: #9ca6af;
+  transition: transform 0.2s ease;
+}
+
+.asana-preview-body {
+  margin-top: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.asana-preview-body.asana-collapsed {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.asana-preview-body pre {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  color: #4a4a4a;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  padding: 10px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e8ecee;
+  line-height: 1.5;
+}
+
+.asana-preview-empty {
+  font-size: 12px;
+  color: #9ca6af;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* ==================== Form Layout ==================== */
+
+.asana-form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.asana-form-half {
+  flex: 1;
+  min-width: 0;
+}
+
+.asana-divider {
+  border: none;
+  border-top: 1px solid #e8ecee;
+  margin: 16px 0;
+}
+
+/* ==================== Improved Attachments ==================== */
+
+.asana-attachment-item {
+  padding: 8px 10px !important;
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #e8ecee;
+  transition: border-color 0.2s ease;
+}
+
+.asana-attachment-item:last-child {
+  margin-bottom: 0;
+}
+
+.asana-attachment-item:hover {
+  border-color: #f06a6a;
+}
+
+.asana-attachment-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.asana-attachment-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.asana-attachment-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e1f21;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asana-attachment-size {
+  font-size: 11px;
+  color: #9ca6af;
+  margin-top: 2px;
+}
+
+.asana-no-attachments {
+  font-size: 12px;
+  color: #9ca6af;
+  font-style: italic;
+  padding: 8px 0;
+}
+
+/* ==================== Autocomplete ==================== */
+
+.asana-autocomplete {
+  position: relative;
+}
+
+.asana-autocomplete-input {
+  width: 100%;
+  cursor: text;
+}
+
+.asana-autocomplete-input:disabled {
+  cursor: not-allowed;
+}
+
+.asana-autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #cfcfcf;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.asana-autocomplete-open .asana-autocomplete-dropdown {
+  display: block;
+}
+
+.asana-autocomplete-open .asana-autocomplete-input {
+  border-radius: 6px 6px 0 0;
+}
+
+.asana-autocomplete-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.1s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asana-autocomplete-item:hover,
+.asana-autocomplete-item.asana-autocomplete-highlighted {
+  background: #f6f8f9;
+}
+
+.asana-autocomplete-item strong {
+  color: #f06a6a;
+  font-weight: 600;
+}
+
+/* Tags dropdown items need flex for the dot */
+.asana-autocomplete-item.asana-tag-item,
+#asana-tags-dropdown .asana-autocomplete-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asana-autocomplete-empty {
+  padding: 12px;
+  color: #9ca6af;
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+}
+
+.asana-autocomplete-selected .asana-autocomplete-input {
+  background: #f0fdf4;
+  border-color: #22c55e;
+}
+
+/* ==================== Tags Autocomplete (Multi-select) ==================== */
+
+.asana-autocomplete-multi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: white;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  min-height: 44px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.asana-autocomplete-multi:focus-within {
+  border-color: #f06a6a;
+  box-shadow: 0 0 0 3px rgba(240, 106, 106, 0.15);
+}
+
+.asana-autocomplete-multi .asana-autocomplete-input {
+  flex: 1;
+  min-width: 120px;
+  border: none;
+  padding: 4px;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+}
+
+.asana-autocomplete-multi .asana-autocomplete-input:focus {
+  box-shadow: none;
+}
+
+.asana-autocomplete-multi .asana-autocomplete-dropdown {
+  top: calc(100% + 1px);
+  left: -1px;
+  right: -1px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+}
+
+.asana-tags-selected {
+  display: contents;
+}
+
+.asana-selected-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--tag-color, #9ca6af);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.asana-tag-remove {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.8;
+  margin-left: 2px;
+}
+
+.asana-tag-remove:hover {
+  opacity: 1;
+}
+
+.asana-tag-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--tag-color, #9ca6af);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ==================== Options Group ==================== */
+
+.asana-options-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px;
+  background: #f6f8f9;
+  border-radius: 6px;
+}
+
+.asana-options-group .asana-checkbox-label {
+  padding: 0;
+  font-size: 13px;
+}
+
+/* ==================== Email Link ==================== */
+
+.asana-email-link {
+  margin-left: auto;
+  font-size: 14px;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.asana-email-link:hover {
+  opacity: 1;
+}
+
+.asana-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==================== Thread Attachments (Grouped by Message) ==================== */
+
+.asana-attachments-thread {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.asana-message-attachments {
+  margin-bottom: 12px;
+  background: #f6f8f9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.asana-message-attachments:last-child {
+  margin-bottom: 0;
+}
+
+.asana-message-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #e8ecee;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.asana-message-header:hover {
+  background: #dde2e5;
+}
+
+.asana-message-toggle {
+  font-size: 10px;
+  color: #6d6e6f;
+  flex-shrink: 0;
+  width: 12px;
+  transition: transform 0.2s ease;
+}
+
+.asana-message-sender {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e1f21;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asana-message-date {
+  font-size: 11px;
+  color: #9ca6af;
+  flex-shrink: 0;
+}
+
+.asana-message-count {
+  font-size: 11px;
+  color: #6d6e6f;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.asana-message-attachments .asana-attachments-list {
+  padding: 8px;
+  background: transparent;
+  max-height: none;
+  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+.asana-message-attachments .asana-attachments-list.asana-collapsed {
+  max-height: 0;
+  padding: 0 8px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* Collapsed message indicators */
+.asana-message-collapsed .asana-message-header {
+  background: #fff3cd;
+  border-left: 3px solid #ffc107;
+}
+
+.asana-message-collapsed .asana-message-header:hover {
+  background: #ffecb3;
+}
+
+.asana-message-collapsed-hint {
+  font-size: 11px;
+  color: #856404;
+  font-style: italic;
+  margin-left: auto;
+}
+
+.asana-attachment-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #fff9e6;
+  border-radius: 6px;
+  border: 1px dashed #ffc107;
+}
+
+.asana-text-muted {
+  color: #9ca6af;
+  font-style: italic;
+}
+
+/* Attachments header with expand button */
+.asana-attachments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.asana-attachments-header .asana-label {
+  margin-bottom: 0;
+}
+
+.asana-btn-expand-all {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #4573d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.asana-btn-expand-all:hover:not(:disabled) {
+  background: #3a62b3;
+}
+
+.asana-btn-expand-all:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.asana-no-attachments {
+  padding: 16px;
+  text-align: center;
+  color: #9ca6af;
+  font-style: italic;
+  background: #f6f8f9;
+  border-radius: 6px;
+}
+
+/* ==================== Mode Toggle ==================== */
+
+.asana-mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.asana-mode-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid #e8ecee;
+  background: white;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6d6e6f;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asana-mode-btn:hover {
+  border-color: #f06a6a;
+  color: #f06a6a;
+}
+
+.asana-mode-btn.asana-mode-active {
+  border-color: #f06a6a;
+  background: #fef2f2;
+  color: #f06a6a;
+}
+
+/* ==================== Task Search ==================== */
+
+.asana-task-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asana-task-check {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #9ca6af;
+  flex-shrink: 0;
+}
+
+.asana-task-completed .asana-task-check {
+  color: #22c55e;
+}
+
+.asana-task-completed .asana-task-name {
+  text-decoration: line-through;
+  color: #9ca6af;
+}
+
+.asana-task-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asana-task-assignee {
+  font-size: 11px;
+  color: #9ca6af;
+  flex-shrink: 0;
+}
+
+/* ==================== Selected Task Preview ==================== */
+
+.asana-selected-task {
+  padding: 12px;
+  background: #f0fdf4;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.asana-selected-task-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.asana-selected-task-header strong {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asana-task-clear {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #9ca6af;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.asana-task-clear:hover {
+  color: #dc2626;
+}
+
+.asana-task-project,
+.asana-task-assignee-info {
+  font-size: 12px;
+  color: #6d6e6f;
+  margin-top: 4px;
+}
+
+/* ==================== Custom Fields ==================== */
+
+#asana-custom-fields-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.asana-custom-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.asana-cf-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6d6e6f;
+  margin-bottom: 4px;
+}
+
+.asana-cf-input {
+  font-size: 13px;
+  padding: 8px 10px;
+}

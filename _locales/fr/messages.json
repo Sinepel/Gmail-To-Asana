@@ -1,0 +1,237 @@
+{
+  "extensionName": {
+    "message": "Gmail vers Asana"
+  },
+  "extensionDescription": {
+    "message": "Créer des tâches Asana depuis Gmail avec les pièces jointes"
+  },
+  "createAsanaTask": {
+    "message": "Créer une tâche Asana"
+  },
+  "emailPreview": {
+    "message": "Aperçu de l'email"
+  },
+  "from": {
+    "message": "De :"
+  },
+  "subject": {
+    "message": "Sujet :"
+  },
+  "noSubject": {
+    "message": "(sans sujet)"
+  },
+  "bodyPreview": {
+    "message": "Aperçu du contenu"
+  },
+  "taskName": {
+    "message": "Nom de la tâche"
+  },
+  "workspace": {
+    "message": "Espace de travail"
+  },
+  "project": {
+    "message": "Projet"
+  },
+  "assignee": {
+    "message": "Responsable"
+  },
+  "dueDate": {
+    "message": "Date d'échéance"
+  },
+  "tags": {
+    "message": "Tags"
+  },
+  "attachments": {
+    "message": "Pièces jointes"
+  },
+  "includeEmailBody": {
+    "message": "Inclure le contenu"
+  },
+  "includeGmailLink": {
+    "message": "Inclure le lien Gmail"
+  },
+  "attachEmlFile": {
+    "message": "Joindre le fichier .eml"
+  },
+  "addAsanaLabel": {
+    "message": "Ajouter le libellé \"Asana\""
+  },
+  "cancel": {
+    "message": "Annuler"
+  },
+  "createTask": {
+    "message": "Créer la tâche"
+  },
+  "creating": {
+    "message": "Création..."
+  },
+  "loading": {
+    "message": "Chargement..."
+  },
+  "selectWorkspace": {
+    "message": "Choisir un espace de travail"
+  },
+  "selectWorkspaceFirst": {
+    "message": "Choisir un espace d'abord"
+  },
+  "searchProjects": {
+    "message": "Rechercher parmi $count$ projets...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "searchTags": {
+    "message": "Rechercher parmi $count$ tags...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "noTagsAvailable": {
+    "message": "Aucun tag disponible"
+  },
+  "noProjectsFound": {
+    "message": "Aucun projet trouvé"
+  },
+  "noTagsFound": {
+    "message": "Aucun tag trouvé"
+  },
+  "unassigned": {
+    "message": "Non assigné"
+  },
+  "me": {
+    "message": "Moi"
+  },
+  "creatingTask": {
+    "message": "Création de la tâche..."
+  },
+  "attachingEmail": {
+    "message": "Ajout de l'email (.eml)..."
+  },
+  "uploadingAttachments": {
+    "message": "Upload de $count$ pièce(s) jointe(s)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "addingLabel": {
+    "message": "Ajout du libellé Gmail..."
+  },
+  "taskCreated": {
+    "message": "Tâche créée !"
+  },
+  "openInAsana": {
+    "message": "Ouvrir dans Asana"
+  },
+  "errorCreateTask": {
+    "message": "Échec de la création :"
+  },
+  "errorLoadWorkspaces": {
+    "message": "Échec du chargement des espaces :"
+  },
+  "errorLoadData": {
+    "message": "Échec du chargement des données :"
+  },
+  "errorEnterTaskName": {
+    "message": "Veuillez entrer un nom de tâche"
+  },
+  "errorSelectProject": {
+    "message": "Veuillez sélectionner un projet"
+  },
+  "errorNotLoggedIn": {
+    "message": "Veuillez d'abord vous connecter à Asana. Ouvrez app.asana.com dans un autre onglet."
+  },
+  "errorNeedsToken": {
+    "message": "Configurez votre token Asana. Cliquez sur l'icône de l'extension."
+  },
+  "errorExtractEmail": {
+    "message": "Impossible d'extraire les données de l'email. Veuillez ouvrir un email."
+  },
+  "openInGmail": {
+    "message": "Ouvrir dans Gmail"
+  },
+  "allThreadAttachments": {
+    "message": "Toutes les pièces jointes du fil"
+  },
+  "currentEmailOnly": {
+    "message": "Email actuel uniquement"
+  },
+  "fromSender": {
+    "message": "De $sender$",
+    "placeholders": {
+      "sender": {
+        "content": "$1"
+      }
+    }
+  },
+  "noAttachmentsInThread": {
+    "message": "Aucune pièce jointe dans ce fil"
+  },
+  "attachmentCount": {
+    "message": "$count$ pièce(s) jointe(s)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "expandInGmail": {
+    "message": "Cliquez dans Gmail pour déplier"
+  },
+  "collapsedAttachments": {
+    "message": "Dépliez ce message dans Gmail pour voir les pièces jointes"
+  },
+  "expandAllMessages": {
+    "message": "Charger toutes les PJ"
+  },
+  "expanding": {
+    "message": "Chargement..."
+  },
+  "refreshAttachments": {
+    "message": "Actualiser"
+  },
+  "linkExistingTask": {
+    "message": "Lier à une tâche existante"
+  },
+  "createNewTask": {
+    "message": "Créer une nouvelle tâche"
+  },
+  "searchTasks": {
+    "message": "Rechercher une tâche..."
+  },
+  "addComment": {
+    "message": "Ajouter en commentaire"
+  },
+  "addingComment": {
+    "message": "Ajout du commentaire..."
+  },
+  "commentAdded": {
+    "message": "Commentaire ajouté !"
+  },
+  "noTasksFound": {
+    "message": "Aucune tâche trouvée"
+  },
+  "selectedTask": {
+    "message": "Tâche sélectionnée"
+  },
+  "customFields": {
+    "message": "Champs personnalisés"
+  },
+  "notificationTitle": {
+    "message": "Tâche créée"
+  },
+  "notificationCommentTitle": {
+    "message": "Commentaire ajouté"
+  },
+  "clickToOpen": {
+    "message": "Cliquez pour ouvrir dans Asana"
+  },
+  "orLinkExisting": {
+    "message": "Ou lier à une tâche existante"
+  }
+}

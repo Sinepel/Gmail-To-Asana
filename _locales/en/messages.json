@@ -1,0 +1,237 @@
+{
+  "extensionName": {
+    "message": "Gmail to Asana"
+  },
+  "extensionDescription": {
+    "message": "Create Asana tasks from Gmail emails with attachments"
+  },
+  "createAsanaTask": {
+    "message": "Create Asana Task"
+  },
+  "emailPreview": {
+    "message": "Email Preview"
+  },
+  "from": {
+    "message": "From:"
+  },
+  "subject": {
+    "message": "Subject:"
+  },
+  "noSubject": {
+    "message": "(no subject)"
+  },
+  "bodyPreview": {
+    "message": "Body preview"
+  },
+  "taskName": {
+    "message": "Task Name"
+  },
+  "workspace": {
+    "message": "Workspace"
+  },
+  "project": {
+    "message": "Project"
+  },
+  "assignee": {
+    "message": "Assignee"
+  },
+  "dueDate": {
+    "message": "Due Date"
+  },
+  "tags": {
+    "message": "Tags"
+  },
+  "attachments": {
+    "message": "Attachments"
+  },
+  "includeEmailBody": {
+    "message": "Include email body"
+  },
+  "includeGmailLink": {
+    "message": "Include Gmail link"
+  },
+  "attachEmlFile": {
+    "message": "Attach .eml file"
+  },
+  "addAsanaLabel": {
+    "message": "Add \"Asana\" label"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "createTask": {
+    "message": "Create Task"
+  },
+  "creating": {
+    "message": "Creating..."
+  },
+  "loading": {
+    "message": "Loading..."
+  },
+  "selectWorkspace": {
+    "message": "Select a workspace"
+  },
+  "selectWorkspaceFirst": {
+    "message": "Select workspace first"
+  },
+  "searchProjects": {
+    "message": "Search $count$ projects...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "searchTags": {
+    "message": "Search $count$ tags...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "noTagsAvailable": {
+    "message": "No tags available"
+  },
+  "noProjectsFound": {
+    "message": "No projects found"
+  },
+  "noTagsFound": {
+    "message": "No tags found"
+  },
+  "unassigned": {
+    "message": "Unassigned"
+  },
+  "me": {
+    "message": "Me"
+  },
+  "creatingTask": {
+    "message": "Creating task..."
+  },
+  "attachingEmail": {
+    "message": "Attaching email (.eml)..."
+  },
+  "uploadingAttachments": {
+    "message": "Uploading $count$ attachment(s)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "addingLabel": {
+    "message": "Adding Gmail label..."
+  },
+  "taskCreated": {
+    "message": "Task created!"
+  },
+  "openInAsana": {
+    "message": "Open in Asana"
+  },
+  "errorCreateTask": {
+    "message": "Failed to create task:"
+  },
+  "errorLoadWorkspaces": {
+    "message": "Failed to load workspaces:"
+  },
+  "errorLoadData": {
+    "message": "Failed to load workspace data:"
+  },
+  "errorEnterTaskName": {
+    "message": "Please enter a task name"
+  },
+  "errorSelectProject": {
+    "message": "Please select a project"
+  },
+  "errorNotLoggedIn": {
+    "message": "Please log in to Asana first. Open app.asana.com in another tab."
+  },
+  "errorNeedsToken": {
+    "message": "Please configure your Asana token. Click on the extension icon."
+  },
+  "errorExtractEmail": {
+    "message": "Could not extract email data. Please open an email first."
+  },
+  "openInGmail": {
+    "message": "Open in Gmail"
+  },
+  "allThreadAttachments": {
+    "message": "All thread attachments"
+  },
+  "currentEmailOnly": {
+    "message": "Current email only"
+  },
+  "fromSender": {
+    "message": "From $sender$",
+    "placeholders": {
+      "sender": {
+        "content": "$1"
+      }
+    }
+  },
+  "noAttachmentsInThread": {
+    "message": "No attachments in this thread"
+  },
+  "attachmentCount": {
+    "message": "$count$ attachment(s)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "expandInGmail": {
+    "message": "Click in Gmail to expand"
+  },
+  "collapsedAttachments": {
+    "message": "Expand this message in Gmail to see attachments"
+  },
+  "expandAllMessages": {
+    "message": "Load all attachments"
+  },
+  "expanding": {
+    "message": "Expanding..."
+  },
+  "refreshAttachments": {
+    "message": "Refresh"
+  },
+  "linkExistingTask": {
+    "message": "Link to existing task"
+  },
+  "createNewTask": {
+    "message": "Create new task"
+  },
+  "searchTasks": {
+    "message": "Search tasks..."
+  },
+  "addComment": {
+    "message": "Add as comment"
+  },
+  "addingComment": {
+    "message": "Adding comment..."
+  },
+  "commentAdded": {
+    "message": "Comment added!"
+  },
+  "noTasksFound": {
+    "message": "No tasks found"
+  },
+  "selectedTask": {
+    "message": "Selected task"
+  },
+  "customFields": {
+    "message": "Custom fields"
+  },
+  "notificationTitle": {
+    "message": "Task created"
+  },
+  "notificationCommentTitle": {
+    "message": "Comment added"
+  },
+  "clickToOpen": {
+    "message": "Click to open in Asana"
+  },
+  "orLinkExisting": {
+    "message": "Or link to existing task"
+  }
+}
