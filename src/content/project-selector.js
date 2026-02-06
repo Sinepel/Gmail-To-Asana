@@ -19,6 +19,7 @@ const ProjectSelector = {
   customFields: [],
   customFieldValues: {},
   mode: 'create', // 'create' or 'comment'
+  editor: null, // Tiptap editor instance
 
   // Shorthand for i18n
   t(key, subs) {
@@ -60,6 +61,7 @@ const ProjectSelector = {
   close() {
     if (this.modal) {
       document.removeEventListener('keydown', this.escapeHandler);
+      this.destroyEditor();
       this.modal.classList.remove('asana-modal-visible');
       setTimeout(() => {
         this.modal.remove();
@@ -206,7 +208,20 @@ const ProjectSelector = {
                   <span class="asana-toggle-icon">▼</span>
                 </div>
                 <div class="asana-preview-body" id="asana-body-content">
-                  <textarea id="asana-body-editable" class="asana-body-textarea">${this.escapeHtml(body)}</textarea>
+                  <div class="asana-editor-toolbar" id="asana-editor-toolbar">
+                    <button type="button" data-action="bold" title="Gras"><b>B</b></button>
+                    <button type="button" data-action="italic" title="Italique"><i>I</i></button>
+                    <button type="button" data-action="underline" title="Souligné"><u>U</u></button>
+                    <button type="button" data-action="strike" title="Barré"><s>S</s></button>
+                    <span class="asana-toolbar-divider"></span>
+                    <button type="button" data-action="bulletList" title="Liste à puces">•</button>
+                    <button type="button" data-action="orderedList" title="Liste numérotée">1.</button>
+                    <button type="button" data-action="blockquote" title="Citation">❝</button>
+                    <span class="asana-toolbar-divider"></span>
+                    <button type="button" data-action="code" title="Code">&lt;/&gt;</button>
+                    <button type="button" data-action="link" title="Lien">🔗</button>
+                  </div>
+                  <div id="asana-tiptap-editor" class="asana-tiptap-container"></div>
                 </div>
               </div>
             ` : ''}
@@ -357,6 +372,9 @@ const ProjectSelector = {
       });
     }
 
+    // Initialize Tiptap editor
+    this.initTiptapEditor();
+
     // Toggle message attachment groups
     this.modal.querySelectorAll('.asana-message-header').forEach(header => {
       header.addEventListener('click', () => {
@@ -381,6 +399,168 @@ const ProjectSelector = {
       if (e.key === 'Escape') this.close();
     };
     document.addEventListener('keydown', this.escapeHandler);
+  },
+
+  /**
+   * Initialize Tiptap WYSIWYG editor
+   */
+  initTiptapEditor() {
+    const editorContainer = this.modal.querySelector('#asana-tiptap-editor');
+    if (!editorContainer || !window.TiptapAsana) return;
+
+    // Convert plain text to HTML for editor
+    const initialContent = window.TiptapAsana.textToHTML(this.emailData.body || '');
+
+    // Create editor
+    this.editor = window.TiptapAsana.createAsanaEditor(editorContainer, initialContent, {
+      onUpdate: () => {
+        this.updateToolbarState();
+      },
+      onSelectionUpdate: () => {
+        this.updateToolbarState();
+      },
+    });
+
+    // Setup toolbar buttons
+    const toolbar = this.modal.querySelector('#asana-editor-toolbar');
+    if (toolbar) {
+      toolbar.querySelectorAll('button[data-action]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.handleToolbarAction(btn.dataset.action);
+        });
+      });
+    }
+
+    // Initial toolbar state
+    this.updateToolbarState();
+  },
+
+  /**
+   * Handle toolbar button actions
+   */
+  handleToolbarAction(action) {
+    if (!this.editor) return;
+
+    switch (action) {
+      case 'bold':
+        this.editor.chain().focus().toggleBold().run();
+        break;
+      case 'italic':
+        this.editor.chain().focus().toggleItalic().run();
+        break;
+      case 'underline':
+        this.editor.chain().focus().toggleUnderline().run();
+        break;
+      case 'strike':
+        this.editor.chain().focus().toggleStrike().run();
+        break;
+      case 'code':
+        this.editor.chain().focus().toggleCode().run();
+        break;
+      case 'bulletList':
+        this.editor.chain().focus().toggleBulletList().run();
+        break;
+      case 'orderedList':
+        this.editor.chain().focus().toggleOrderedList().run();
+        break;
+      case 'blockquote':
+        this.editor.chain().focus().toggleBlockquote().run();
+        break;
+      case 'link':
+        this.handleLinkAction();
+        break;
+    }
+
+    this.updateToolbarState();
+  },
+
+  /**
+   * Handle link insertion/removal
+   */
+  handleLinkAction() {
+    if (!this.editor) return;
+
+    const previousUrl = this.editor.getAttributes('link').href;
+
+    if (previousUrl) {
+      // Remove link
+      this.editor.chain().focus().unsetLink().run();
+    } else {
+      // Add link
+      const url = prompt('URL du lien:', 'https://');
+      if (url && url !== 'https://') {
+        this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+      }
+    }
+  },
+
+  /**
+   * Update toolbar button active states
+   */
+  updateToolbarState() {
+    if (!this.editor) return;
+
+    const toolbar = this.modal.querySelector('#asana-editor-toolbar');
+    if (!toolbar) return;
+
+    toolbar.querySelectorAll('button[data-action]').forEach(btn => {
+      const action = btn.dataset.action;
+      let isActive = false;
+
+      switch (action) {
+        case 'bold':
+          isActive = this.editor.isActive('bold');
+          break;
+        case 'italic':
+          isActive = this.editor.isActive('italic');
+          break;
+        case 'underline':
+          isActive = this.editor.isActive('underline');
+          break;
+        case 'strike':
+          isActive = this.editor.isActive('strike');
+          break;
+        case 'code':
+          isActive = this.editor.isActive('code');
+          break;
+        case 'bulletList':
+          isActive = this.editor.isActive('bulletList');
+          break;
+        case 'orderedList':
+          isActive = this.editor.isActive('orderedList');
+          break;
+        case 'blockquote':
+          isActive = this.editor.isActive('blockquote');
+          break;
+        case 'link':
+          isActive = this.editor.isActive('link');
+          break;
+      }
+
+      btn.classList.toggle('asana-toolbar-active', isActive);
+    });
+  },
+
+  /**
+   * Get editor content as Asana-compatible HTML
+   */
+  getEditorContent() {
+    if (this.editor && window.TiptapAsana) {
+      return window.TiptapAsana.getAsanaHTML(this.editor);
+    }
+    // Fallback to plain text
+    return this.emailData.body || '';
+  },
+
+  /**
+   * Destroy editor when closing modal
+   */
+  destroyEditor() {
+    if (this.editor) {
+      this.editor.destroy();
+      this.editor = null;
+    }
   },
 
   /**
@@ -1113,13 +1293,12 @@ const ProjectSelector = {
         htmlNotes += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>\n`;
       }
 
-      // Add body as blockquote (use edited content from textarea)
-      const editedBody = this.modal.querySelector('#asana-body-editable')?.value || this.emailData.body;
-      if (includeBody && editedBody) {
-        const cleanBody = this.escapeHtml(editedBody)
-          .replace(/\n{3,}/g, '\n\n')
-          .replace(/^\s+|\s+$/g, '');
-        htmlNotes += `\n<blockquote>${cleanBody}</blockquote>`;
+      // Add body content from WYSIWYG editor
+      if (includeBody && this.editor) {
+        const editorHtml = this.editor.getHTML();
+        if (editorHtml && editorHtml !== '<p></p>') {
+          htmlNotes += `\n${editorHtml}`;
+        }
       }
 
       htmlNotes += '</body>';
@@ -1285,13 +1464,12 @@ const ProjectSelector = {
         htmlComment += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>`;
       }
 
-      // Add body as blockquote (use edited content from textarea)
-      const editedBody = this.modal.querySelector('#asana-body-editable')?.value || this.emailData.body;
-      if (includeBody && editedBody) {
-        const cleanBody = this.escapeHtml(editedBody)
-          .replace(/\n{3,}/g, '\n\n')
-          .replace(/^\s+|\s+$/g, '');
-        htmlComment += `\n<blockquote>${cleanBody}</blockquote>`;
+      // Add body content from WYSIWYG editor
+      if (includeBody && this.editor) {
+        const editorHtml = this.editor.getHTML();
+        if (editorHtml && editorHtml !== '<p></p>') {
+          htmlComment += `\n${editorHtml}`;
+        }
       }
 
       htmlComment += '</body>';

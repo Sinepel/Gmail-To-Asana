@@ -499,6 +499,129 @@
   box-shadow: 0 0 0 2px rgba(240, 106, 106, 0.1);
 }
 
+/* ==================== Tiptap WYSIWYG Editor ==================== */
+
+.asana-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  background: #f8f9fa;
+  border: 1px solid #e8ecee;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  flex-wrap: wrap;
+}
+
+.asana-editor-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #5f6368;
+  transition: all 0.15s ease;
+}
+
+.asana-editor-toolbar button:hover {
+  background: #e8eaed;
+  border-color: #dadce0;
+}
+
+.asana-editor-toolbar button.asana-toolbar-active {
+  background: #e8f0fe;
+  border-color: #4285f4;
+  color: #1967d2;
+}
+
+.asana-toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background: #dadce0;
+  margin: 0 6px;
+}
+
+.asana-tiptap-container {
+  border: 1px solid #e8ecee;
+  border-radius: 0 0 4px 4px;
+  background: white;
+  min-height: 120px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.asana-tiptap-container .ProseMirror {
+  padding: 10px;
+  outline: none;
+  min-height: 100px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  color: #1e1f21;
+  line-height: 1.5;
+}
+
+.asana-tiptap-container .ProseMirror:focus {
+  outline: none;
+}
+
+.asana-tiptap-container .ProseMirror p {
+  margin: 0 0 8px 0;
+}
+
+.asana-tiptap-container .ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.asana-tiptap-container .ProseMirror ul,
+.asana-tiptap-container .ProseMirror ol {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.asana-tiptap-container .ProseMirror li {
+  margin: 4px 0;
+}
+
+.asana-tiptap-container .ProseMirror blockquote {
+  margin: 8px 0;
+  padding-left: 12px;
+  border-left: 3px solid #e8ecee;
+  color: #6d6e6f;
+}
+
+.asana-tiptap-container .ProseMirror code {
+  background: #f1f3f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'SF Mono', Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+.asana-tiptap-container .ProseMirror a {
+  color: #1967d2;
+  text-decoration: underline;
+}
+
+.asana-tiptap-container .ProseMirror u {
+  text-decoration: underline;
+}
+
+.asana-tiptap-container .ProseMirror s {
+  text-decoration: line-through;
+}
+
+/* Focus state for editor container */
+.asana-tiptap-container:focus-within {
+  border-color: #f06a6a;
+  box-shadow: 0 0 0 2px rgba(240, 106, 106, 0.1);
+}
+
 .asana-preview-empty {
   font-size: 12px;
   color: #9ca6af;

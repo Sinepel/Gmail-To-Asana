@@ -9,6 +9,15 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+// Bundle Tiptap first
+console.log('Bundling Tiptap editor...');
+try {
+  execSync('node build/bundle-tiptap.js', { stdio: 'inherit' });
+} catch (error) {
+  console.error('Failed to bundle Tiptap');
+  process.exit(1);
+}
+
 const ROOT_DIR = path.join(__dirname, '..');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 
