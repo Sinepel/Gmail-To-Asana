@@ -206,7 +206,7 @@ const ProjectSelector = {
                   <span class="asana-toggle-icon">▼</span>
                 </div>
                 <div class="asana-preview-body" id="asana-body-content">
-                  <pre>${this.escapeHtml(bodyPreview)}</pre>
+                  <textarea id="asana-body-editable" class="asana-body-textarea">${this.escapeHtml(body)}</textarea>
                 </div>
               </div>
             ` : ''}
@@ -1113,9 +1113,10 @@ const ProjectSelector = {
         htmlNotes += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>\n`;
       }
 
-      // Add body as blockquote
-      if (includeBody && this.emailData.body) {
-        const cleanBody = this.escapeHtml(this.emailData.body)
+      // Add body as blockquote (use edited content from textarea)
+      const editedBody = this.modal.querySelector('#asana-body-editable')?.value || this.emailData.body;
+      if (includeBody && editedBody) {
+        const cleanBody = this.escapeHtml(editedBody)
           .replace(/\n{3,}/g, '\n\n')
           .replace(/^\s+|\s+$/g, '');
         htmlNotes += `\n<blockquote>${cleanBody}</blockquote>`;
@@ -1284,9 +1285,10 @@ const ProjectSelector = {
         htmlComment += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>`;
       }
 
-      // Add body as blockquote
-      if (includeBody && this.emailData.body) {
-        const cleanBody = this.escapeHtml(this.emailData.body)
+      // Add body as blockquote (use edited content from textarea)
+      const editedBody = this.modal.querySelector('#asana-body-editable')?.value || this.emailData.body;
+      if (includeBody && editedBody) {
+        const cleanBody = this.escapeHtml(editedBody)
           .replace(/\n{3,}/g, '\n\n')
           .replace(/^\s+|\s+$/g, '');
         htmlComment += `\n<blockquote>${cleanBody}</blockquote>`;
