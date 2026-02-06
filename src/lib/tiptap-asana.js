@@ -63,24 +63,63 @@ export function createAsanaEditor(element, content = '', options = {}) {
 }
 
 /**
- * Convert editor content to Asana-compatible HTML
+ * Convert editor content to Asana-compatible HTML/XML
  * @param {Editor} editor - Tiptap editor instance
- * @returns {string} HTML wrapped in <body> tag for Asana
+ * @returns {string} XML wrapped in <body> tag for Asana
  */
 export function getAsanaHTML(editor) {
   let html = editor.getHTML();
+
+  // Convert HTML to Asana-compatible XML
+  html = convertToAsanaXML(html);
 
   // Wrap in body tag for Asana
   return `<body>${html}</body>`;
 }
 
 /**
+ * Convert Tiptap HTML output to Asana-compatible XML
+ * Asana supports: strong, em, u, s, code, ol, ul, li, blockquote, a
+ * Does NOT support: p, br, div, span
+ */
+function convertToAsanaXML(html) {
+  // Replace <p> tags with line breaks (Asana uses plain text with newlines)
+  // Keep content, add newlines between paragraphs
+  html = html.replace(/<p>/g, '');
+  html = html.replace(/<\/p>/g, '\n');
+
+  // Convert <br> and <br/> to newlines
+  html = html.replace(/<br\s*\/?>/g, '\n');
+
+  // Convert <strong> (keep as-is, Asana supports it)
+  // Convert <em> (keep as-is, Asana supports it)
+  // Convert <u> (keep as-is, Asana supports it)
+  // Convert <s> (keep as-is, Asana supports it)
+  // Convert <code> (keep as-is, Asana supports it)
+
+  // Ensure self-closing tags are XML compliant
+  html = html.replace(/<hr>/g, '<hr/>');
+  html = html.replace(/<img([^>]*)>/g, '<img$1/>');
+
+  // Remove empty tags
+  html = html.replace(/<(\w+)>\s*<\/\1>/g, '');
+
+  // Clean up multiple newlines
+  html = html.replace(/\n{3,}/g, '\n\n');
+
+  // Trim
+  html = html.trim();
+
+  return html;
+}
+
+/**
  * Convert plain text to HTML for the editor
  * @param {string} text - Plain text content
- * @returns {string} HTML content
+ * @returns {string} HTML content for Tiptap (uses <p> internally)
  */
 export function textToHTML(text) {
-  if (!text) return '';
+  if (!text) return '<p></p>';
 
   // Escape HTML entities
   const escaped = text
@@ -88,7 +127,8 @@ export function textToHTML(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // Convert line breaks to paragraphs
+  // Convert line breaks to paragraphs for Tiptap editor display
+  // (will be converted back when exporting to Asana)
   const paragraphs = escaped.split(/\n\n+/);
   return paragraphs
     .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
