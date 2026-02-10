@@ -140,4 +140,5 @@ window.TiptapAsana = {
   createAsanaEditor,
   getAsanaHTML,
   textToHTML,
+  convertToAsanaXML,
 };

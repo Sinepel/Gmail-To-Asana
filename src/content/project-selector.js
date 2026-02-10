@@ -1275,33 +1275,32 @@ const ProjectSelector = {
     try {
       this.showStatus(this.t('creatingTask'), 'info');
 
-      // Build HTML notes using Asana's rich text format (valid XML)
-      let htmlNotes = '<body>';
+      // Build Asana-compatible HTML notes
+      const convert = window.TiptapAsana?.convertToAsanaXML || (h => h);
+      let parts = [];
 
       // Add sender info
       if (this.emailData.sender) {
-        htmlNotes += `${this.t('from')} ${this.escapeHtml(this.emailData.sender)}\n`;
+        parts.push(`${this.t('from')} ${this.escapeHtml(this.emailData.sender)}`);
       }
-
       // Add date if available
       if (this.emailData.date) {
-        htmlNotes += `Date: ${this.escapeHtml(this.emailData.date)}\n`;
+        parts.push(`Date: ${this.escapeHtml(this.emailData.date)}`);
       }
-
       // Add Gmail link
       if (includeLink && this.emailData.emailUrl) {
-        htmlNotes += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>\n`;
+        parts.push(`<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>`);
       }
-
-      // Add body content from WYSIWYG editor
+      // Add body content from WYSIWYG editor (converted to Asana XML)
       if (includeBody && this.editor) {
         const editorHtml = this.editor.getHTML();
         if (editorHtml && editorHtml !== '<p></p>') {
-          htmlNotes += `\n${editorHtml}`;
+          parts.push(convert(editorHtml));
         }
       }
 
-      htmlNotes += '</body>';
+      const htmlNotes = `<body>${parts.join('\n')}</body>`;
+      console.log('html_notes:', htmlNotes);
 
       // Build custom fields data
       const customFieldsData = {};
@@ -1444,35 +1443,33 @@ const ProjectSelector = {
     try {
       this.showStatus(this.t('addingComment'), 'info');
 
-      // Build HTML comment using Asana's rich text format (valid XML)
-      let htmlComment = '<body>';
-      htmlComment += `<strong>${this.escapeHtml(this.emailData.subject || '(no subject)')}</strong>`;
+      // Build Asana-compatible HTML comment
+      const convert = window.TiptapAsana?.convertToAsanaXML || (h => h);
+      let commentParts = [];
 
-      // Add sender and date on new line
-      if (this.emailData.sender || this.emailData.date) {
-        htmlComment += '\n';
-        if (this.emailData.sender) {
-          htmlComment += `De: ${this.escapeHtml(this.emailData.sender)}`;
-        }
-        if (this.emailData.date) {
-          htmlComment += this.emailData.sender ? ` | ${this.escapeHtml(this.emailData.date)}` : this.escapeHtml(this.emailData.date);
-        }
-      }
+      commentParts.push(`<strong>${this.escapeHtml(this.emailData.subject || '(no subject)')}</strong>`);
+
+      // Add sender and date
+      const meta = [];
+      if (this.emailData.sender) meta.push(`De: ${this.escapeHtml(this.emailData.sender)}`);
+      if (this.emailData.date) meta.push(this.escapeHtml(this.emailData.date));
+      if (meta.length > 0) commentParts.push(meta.join(' | '));
 
       // Add Gmail link
       if (includeLink && this.emailData.emailUrl) {
-        htmlComment += `\n<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>`;
+        commentParts.push(`<a href="${this.escapeHtml(this.emailData.emailUrl)}">Ouvrir dans Gmail</a>`);
       }
 
-      // Add body content from WYSIWYG editor
+      // Add body content from WYSIWYG editor (converted to Asana XML)
       if (includeBody && this.editor) {
         const editorHtml = this.editor.getHTML();
         if (editorHtml && editorHtml !== '<p></p>') {
-          htmlComment += `\n${editorHtml}`;
+          commentParts.push(convert(editorHtml));
         }
       }
 
-      htmlComment += '</body>';
+      const htmlComment = `<body>${commentParts.join('\n')}</body>`;
+      console.log('html_text:', htmlComment);
 
       // Add comment to task
       const commentResponse = await chrome.runtime.sendMessage({
