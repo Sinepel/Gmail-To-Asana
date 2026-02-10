@@ -4,6 +4,46 @@
  * Supports i18n (English/French)
  */
 
+/**
+ * Convert Tiptap HTML to Asana-compatible XML
+ * Asana supports: strong, em, u, s, code, ol, ul, li, blockquote, a (href only)
+ * Does NOT support: p, br, div, span, h1-h6, img, hr, etc.
+ * &nbsp; is NOT valid XML - must be replaced
+ */
+function tiptapToAsanaXML(html) {
+  if (!html) return '';
+
+  // Replace &nbsp; with regular space (not valid XML entity)
+  html = html.replace(/&nbsp;/g, ' ');
+  // Replace any other HTML entities not valid in XML
+  html = html.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;|#x[0-9a-fA-F]+;)/g, '&amp;');
+
+  // Remove <p> tags (with or without attributes) - replace with newlines
+  html = html.replace(/<p[^>]*>/g, '');
+  html = html.replace(/<\/p>/g, '\n');
+
+  // Convert <br> to newlines
+  html = html.replace(/<br\s*\/?>/g, '\n');
+
+  // Remove unsupported tags entirely
+  html = html.replace(/<\/?(div|span|h[1-6]|img|hr|table|tr|td|th|thead|tbody|pre|figure|figcaption)[^>]*>/g, '');
+
+  // Strip attributes from all tags except <a> (Asana only allows href on <a>)
+  // Keep <a href="..."> but strip everything else from <a>
+  html = html.replace(/<a\s+[^>]*?(href="[^"]*")[^>]*>/g, '<a $1>');
+
+  // Strip attributes from all other tags (strong, em, u, s, code, ol, ul, li, blockquote)
+  html = html.replace(/<(strong|em|u|s|code|ol|ul|li|blockquote)\s+[^>]*>/g, '<$1>');
+
+  // Remove empty tags
+  html = html.replace(/<(\w+)>\s*<\/\1>/g, '');
+
+  // Clean up multiple newlines
+  html = html.replace(/\n{3,}/g, '\n\n');
+
+  return html.trim();
+}
+
 const ProjectSelector = {
   modal: null,
   emailData: null,
@@ -1276,7 +1316,7 @@ const ProjectSelector = {
       this.showStatus(this.t('creatingTask'), 'info');
 
       // Build Asana-compatible HTML notes
-      const convert = window.TiptapAsana?.convertToAsanaXML || (h => h);
+      const convert = tiptapToAsanaXML;
       let parts = [];
 
       // Add sender info
@@ -1444,7 +1484,7 @@ const ProjectSelector = {
       this.showStatus(this.t('addingComment'), 'info');
 
       // Build Asana-compatible HTML comment
-      const convert = window.TiptapAsana?.convertToAsanaXML || (h => h);
+      const convert = tiptapToAsanaXML;
       let commentParts = [];
 
       commentParts.push(`<strong>${this.escapeHtml(this.emailData.subject || '(no subject)')}</strong>`);
